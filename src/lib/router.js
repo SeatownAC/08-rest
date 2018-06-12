@@ -11,30 +11,10 @@ router.routes = {};
 const methods = ['GET','PUT','PATCH','POST','DELETE'];
 
 methods.forEach( (method) => {
-  /* Create a new "node" in the routing table.
-     i.e.
-     router.routes.GET = {}
-     router.routes.POST = {}
-     ...
-  */
+ 
   router.routes[method] = {};
 
-  /*
-    This next bit of code creates a set of functions that will accept route definitions.
-    When this completes, you will end up with functions created like
-    these (below), which you can later use to create actual routes
-    router.get = (path, callback) = function(path,callback) { router.routes[method][path] = callback; }
-    router.post = (path, callback) = function(path,callback) { router.routes[method][path] = callback; }
-    ...
-    So ... if you were to do this in some other module:
-      router.route.get('/foo', (req,res) => console.log("Hi"));
-      router.route.get('/bar', (req,res) => console.log("Bye"));
-      That would result in a new router table entries like this:
-      router.GET: {
-        '/foo': (req,res) => console.log("Hi")),
-        '/bar': (req,res) => console.log("Bye"))
-      }
-  */
+  
   router[method.toLowerCase()] = function(path, callback) {
     router.routes[method][path] = callback;
   };
